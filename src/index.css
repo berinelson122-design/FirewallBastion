@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-void: #000000;
+    --color-cyber-red: #FF003C;
+    --color-red-violet: #E056FD;
+  }
+  
+  html, body {
+    @apply bg-black text-white p-0 m-0 overflow-hidden w-screen h-screen selection:bg-[#FF003C] selection:text-white;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Scanline animation */
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  .scanline {
+    animation: scanline 8s linear infinite;
+  }
+}
