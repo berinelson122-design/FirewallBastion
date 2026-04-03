@@ -4,7 +4,6 @@ import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
 
-
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
   return {
@@ -45,7 +44,8 @@ export default defineConfig(({ mode }) => {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,mp3,wav,json}'],
           runtimeCaching: [
             {
-              urlPattern: ({ request }) => request.destination === 'document',
+              // PATCH 1: Explicitly defining the request type
+              urlPattern: ({ request }: { request: any }) => request.destination === 'document',
               handler: 'NetworkFirst',
             }
           ]
@@ -61,15 +61,9 @@ export default defineConfig(({ mode }) => {
         '@': path.resolve(__dirname, './src'),
       }
     },
-    build: {
-      outDir: 'dist',
-      minify: 'terser',
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-        },
-      },
+    // PATCH 2: Replacing deprecated Terser with modern esbuild compiler rules
+    esbuild: {
+      drop: ['console', 'debugger'],
     },
   };
 });
