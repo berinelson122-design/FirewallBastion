@@ -24,11 +24,11 @@ export const BuildMenu: React.FC = () => {
       <div className="text-xs text-gray-400 uppercase tracking-widest border-b border-[#333] pb-2 mb-2">
         CONSTRUCT PROTOCOLS
       </div>
-      
+
       {TOWER_OPTIONS.map(tower => {
         const isSelected = selectedTowerType === tower.id;
         const canAfford = bits >= tower.cost;
-        
+
         return (
           <button
             key={tower.id}
@@ -41,7 +41,7 @@ export const BuildMenu: React.FC = () => {
             `}
           >
             {isSelected && <span className="absolute top-0 right-0 w-2 h-2 bg-[var(--color-cyber-red)]" />}
-            
+
             <div className="flex justify-between w-full mb-1">
               <span className="font-bold text-sm text-white">{tower.name}</span>
               <span className="text-xs font-mono" style={{ color: tower.color }}>{tower.cost} BITS</span>
